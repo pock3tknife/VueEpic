@@ -3,7 +3,7 @@
     <ul>
       <li><a href="/">Home</a></li>
       <li id="services">
-        <a href="/grid">Services</a>
+        <a href="/">Services</a>
         <div class="sub-nav">
           <div class="sub-nav-col left">
             <a href="#" class="sub-nav-box" id="box-1">
@@ -134,15 +134,58 @@
       </li>
       <li><a href="/">Tools</a></li>
       <li><a href="/">Contacts</a></li>
-      <li><a href="/">Sign up</a></li>
+      <!--<li><a href="/">Sign up</a></li>-->
+        <div>
+    <div v-if="loggedIn">
+      <button class="but" @click="signOut">Sign out</button>
+    </div>
+    <div v-else>
+      <a href="/signup">Sign up</a>
+    </div>
+  </div>
     </ul>
   </nav>
+
 </template>
 
 <script>
+import * as firebase from "firebase/app";
+import "firebase/auth";
+
 export default {
   name: "navbar",
   components: {},
+  mounted() {
+    this.setupFirebase();
+  },
+  methods: {
+    setupFirebase() {
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          // User is signed in.
+          console.log("signed in");
+          this.loggedIn = true;
+        } else {
+          // No user is signed in.
+          this.loggedIn = false;
+          console.log("signed out", this.loggedIn);
+        }
+      });
+    },
+    signOut() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.$router.replace({ name: "login" });
+        });
+    },
+  },
+  data() {
+    return {
+      loggedIn: false,
+    };
+  },
 };
 </script>
 

@@ -7,8 +7,10 @@
       <Navbar />
     </div>
   </header>
-  <router-view />
-  <Footer />
+  <div class="dvview" style="margin-top:100px;">
+    <router-view />
+  </div>
+  <!--<Footer />-->
 </template>
 
 <script>
