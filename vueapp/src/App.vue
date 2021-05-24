@@ -10,18 +10,35 @@
   <div class="dvview" style="margin-top:100px;">
     <router-view />
   </div>
-  <!--<Footer />-->
+  <Footer />
 </template>
 
 <script>
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import { onBeforeMount } from "vue";
+import { useRouter, useRoute } from "vue-router";
+import firebase from "firebase";
 
 export default {
   name: "app",
   components: {
     Navbar,
     Footer,
+  },
+  setup() {
+    const router = useRouter();
+    const route = useRoute();
+
+    onBeforeMount(() => {
+      firebase.auth().onAuthStateChanged((user) => {
+        if (!user) {
+          router.replace("/login");
+        } else if (route.path == "/login" || route.path == "/register") {
+          router.replace("/");
+        }
+      });
+    });
   },
 };
 </script>

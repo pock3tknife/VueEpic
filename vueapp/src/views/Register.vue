@@ -1,61 +1,44 @@
 <template>
-  <div>
-    <div class="error" v-if="error">{{ error.message }}</div>
-    <form @submit.prevent="pressed">
-      Register
-      <div class="email">
-        <input type="email" v-model="email" placeholder="email" />
-      </div>
-      <div class="password">
-        <input type="password" v-model="password" placeholder="password" />
-      </div>
-      <button type="submit">Register</button>
+  <div class="register">
+    <h1>Register</h1>
+    <form @submit.prevent="Register">
+      <input type="text" placeholder="Email" v-model="email" />
+      <input type="password" placeholder="Password" v-model="password" />
+      <input type="submit" value="Register" />
+      <p>
+        Have an account?
+        <router-link to="/login">Login Here </router-link>
+      </p>
     </form>
   </div>
 </template>
 
 <script>
-import * as firebase from "firebase/app";
-import "firebase/auth";
+import firebase from "firebase";
+import { ref } from "vue";
 
 export default {
-  data() {
-    return {
-      email: "",
-      password: "",
-      error: "",
-    };
-  },
-  methods: {
-    pressed() {
+  setup() {
+    const email = ref("");
+    const password = ref("");
+
+    const Register = () => {
       firebase
         .auth()
-        .createUserWithEmailAndPassword(this.email, this.password)
-        .then(() => {
-          console.log("here");
-          this.$router.replace({ name: "secret" });
+        .createUserWithEmailAndPassword(email.value, password.value)
+        .then((user) => {
+          alert(user);
         })
-        .catch((error) => (this.error = error));
-    },
+        .catch((err) => alert(err.message));
+    };
+
+    return {
+      Register,
+      email,
+      password,
+    };
   },
 };
 </script>
 
-<style>
-.error {
-  color: red;
-  font-size: 18px;
-}
-input {
-  width: 400px;
-  padding: 30px;
-  margin: 20px;
-  font-size: 21px;
-}
-
-button {
-  width: 400px;
-  height: 75px;
-  font-size: 100%;
-}
-</style>
+<style></style>

@@ -7,7 +7,7 @@ import router from "./router";
 var firebaseConfig = {
   apiKey: "AIzaSyD9Kp4pWCW0lPoJv0GhX34AoyGN3GcBo9U",
   authDomain: "vue-auth-1afc6.firebaseapp.com",
-  databaseURL: "https://vue-auth-1afc6.firebaseapp.com",
+  //databaseURL: "https://vue-auth-1afc6.firebaseapp.com",
   projectId: "vue-auth-1afc6",
   storageBucket: "vue-auth-1afc6.appspot.com",
   messagingSenderId: "1023427373675",

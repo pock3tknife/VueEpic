@@ -1,4 +1,4 @@
-import { VueRouter, createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import Register from "../views/Register.vue";
 import Login from "../views/Login.vue";
@@ -30,13 +30,8 @@ const routes = [
   },
   {
     path: "/register",
-    name: "register",
-    component: Register,
-  },
-  {
-    path: "/signup",
-    name: "Signup",
-    component: () => import("../views/Signup.vue"),
+    name: "Register",
+    component: () => import("../views/Register.vue"),
   },
   {
     path: "/dashboard",
@@ -51,18 +46,6 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
-});
-
-router.beforeEach((to, from, next) => {
-  const authenticatedUser = firebase.auth().currentUser;
-  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
-
-  if (requiresAuth && !authenticatedUser) {
-    alert("You are not authorized to access this area.");
-    next("login");
-  } else {
-    next();
-  }
 });
 
 export default router;
