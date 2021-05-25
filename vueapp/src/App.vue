@@ -10,7 +10,7 @@
   <div class="dvview" style="margin-top:100px;">
     <router-view />
   </div>
-  <Footer />
+  <!--<Footer />-->
 </template>
 
 <script>
