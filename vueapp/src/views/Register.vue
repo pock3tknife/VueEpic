@@ -3,12 +3,17 @@
     <h1>Register</h1>
     <form @submit.prevent="Register">
       <div class="txt_field">
-        <input type="text" placeholder="Email" v-model="email" />
+        <input type="text" placeholder="Email" v-model="email" required />
         <span></span>
         <label>Email</label>
       </div>
       <div class="txt_field">
-        <input type="password" placeholder="Password" v-model="password" />
+        <input
+          type="password"
+          placeholder="Password"
+          v-model="password"
+          required
+        />
         <span></span>
         <label>Password</label>
       </div>
