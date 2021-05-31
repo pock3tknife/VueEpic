@@ -132,7 +132,7 @@
           </div>
         </div>
       </li>
-      <li><a href="/">Tools</a></li>
+      <li><a href="/animesearch">AnimeSearch</a></li>
       <li><a href="/">Contacts</a></li>
       <li><a href="/register">Sign up</a></li>
       <!--<div>
